@@ -6,8 +6,96 @@ import Image from "gatsby-image"
 import { FaQuoteRight } from "react-icons/fa"
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi"
 
+const query = graphql`
+  {
+    allAirtable(filter: { table: { eq: "Customers" } }) {
+      nodes {
+        id
+        data {
+          name
+          quote
+          title
+          image {
+            localFiles {
+              childImageSharp {
+                fixed(width: 150, height: 150) {
+                  ...GatsbyImageSharpFixed
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 const Slider = () => {
-  return <h2>slider component</h2>
+  const data = useStaticQuery(query)
+  const {
+    allAirtable: { nodes: customers },
+  } = data
+  const [index, setIndex] = React.useState(0)
+  React.useEffect(() => {
+    const lastIndex = customers.length - 1
+    if (index < 0) {
+      setIndex(lastIndex)
+    }
+    if (index > lastIndex) {
+      setIndex(0)
+    }
+  }, [index, customers])
+
+  return (
+    <Wrapper>
+      <Title title="reviews" />
+      <div className="section-center">
+        {customers.map((customer, customerIndex) => {
+          //   console.log(customer)
+          const {
+            data: { name, image, title, quote },
+          } = customer
+          const customerImg = image.localFiles[0].childImageSharp.fixed
+
+          let position = "nextSlide"
+          if (customerIndex === index) {
+            position = "activeSlide"
+          }
+          if (
+            customerIndex === index - 1 ||
+            (index === 0 && customerIndex === customers.lenght - 1)
+          ) {
+            position = "lastSlide"
+          }
+          return (
+            <article key={customerIndex} className={position}>
+              <Image fixed={customerImg} className="img" />
+              <h4>{name}</h4>
+              <p className="title">{title}</p>
+              <p className="text">{quote}</p>
+              <FaQuoteRight className="icon" />
+            </article>
+          )
+        })}
+        <button
+          className="prev"
+          onClick={() => {
+            setIndex(index - 1)
+          }}
+        >
+          <FiChevronLeft />
+        </button>
+        <button
+          className="next"
+          onClick={() => {
+            setIndex(index + 1)
+          }}
+        >
+          <FiChevronRight />
+        </button>
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div`

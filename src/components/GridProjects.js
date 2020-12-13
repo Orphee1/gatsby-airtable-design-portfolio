@@ -3,8 +3,32 @@ import Title from "./Title"
 import Image from "gatsby-image"
 import styled from "styled-components"
 import { Link } from "gatsby"
-const GridProjects = () => {
-  return <h2>grid projects</h2>
+const GridProjects = ({ projects, title }) => {
+  return (
+    <Wrapper>
+      <Title title={title || "projects"} />
+      <div className="tile-layout">
+        {projects.map((project, index) => {
+          const { id } = project
+          const { date, name, type, image } = project.data
+          const fluid = image.localFiles[0].childImageSharp.fluid
+
+          return (
+            <article key={index} className={`div-${index}`}>
+              <Image className="img" fluid={fluid} />
+              <div className="info">
+                <p>- {type} -</p>
+                <h3>{name}</h3>
+              </div>
+            </article>
+          )
+        })}
+      </div>
+      <Link to="/projects" className="btn">
+        All projects
+      </Link>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`

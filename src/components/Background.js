@@ -3,11 +3,45 @@ import BackgroundImage from "gatsby-background-image"
 import styled, { keyframes } from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 
-const Background = () => {
-  return <h2>background image component</h2>
+const query = graphql`
+  {
+    file(relativePath: { eq: "mainBcg.png" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
+
+const Background = ({ children, image }) => {
+  const data = useStaticQuery(query)
+
+  const {
+    file: {
+      childImageSharp: { fluid },
+    },
+  } = data
+
+  return (
+    <Wrapper>
+      <BackgroundImage
+        Tag="div"
+        fluid={image || fluid} // image comes from Hero
+        preserveStackingContext={true}
+        className="bcg"
+      >
+        {children}
+      </BackgroundImage>
+    </Wrapper>
+  )
 }
 
-const fadeIn = keyframes`
+const fadeIn = keyframes`import { wrapRootElement as wrap  } from "./root-wrapper"
+
+export const wrapRootElement = wrap
+
       from{
          background-color:rgb(0,0,0,0.8);
       }

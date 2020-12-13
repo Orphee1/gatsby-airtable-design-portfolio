@@ -2,7 +2,7 @@ import React from "react"
 import { Layout, SEO } from "../../components"
 import styled from "styled-components"
 import { Link } from "gatsby"
-const Payments = props => {
+const Libraries = props => {
   console.log(props)
   const path = props.location.pathname.slice(1)
   return (
@@ -43,4 +43,4 @@ const Wrapper = styled.main`
   }
 `
 
-export default Payments
+export default Libraries

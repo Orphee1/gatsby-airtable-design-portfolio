@@ -4,9 +4,40 @@ import logo from "../images/logo.svg"
 import { GoThreeBars } from "react-icons/go"
 import { Link } from "gatsby"
 import NavLink from "./NavLink"
+import { GatsbyContext } from "../context/context"
 
 const Navbar = () => {
-  return <h2>navbar component</h2>
+  const { isSideBarOpen, showSideBar, links } = useContext(GatsbyContext)
+  // To map only on the unique values of links
+  const tempLinks = [
+    ...new Set(
+      links.map(link => {
+        return link.page
+      })
+    ),
+  ]
+
+  return (
+    <Wrapper>
+      <div className="nav-center">
+        <div className="nav-header">
+          <Link to="/">
+            <img src={logo} alt="design" />
+          </Link>
+          {!isSideBarOpen && (
+            <button className="toggle-btn" onClick={showSideBar}>
+              <GoThreeBars />
+            </button>
+          )}
+        </div>
+        <ul className="nav-links">
+          {tempLinks.map((page, index) => {
+            return <NavLink key={index} page={page} />
+          })}
+        </ul>
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.nav`
