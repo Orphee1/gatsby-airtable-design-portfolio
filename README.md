@@ -1,80 +1,24 @@
-## Setup
+# Design portfolio
 
-- folders/files/imports
-- css (styled components)
-- error page, footer, seo
+App built with [React](https://reactjs.org/) in [Gatsby](https://www.gatsbyjs.com/)
 
-## Styled Components
+[![Site overview](https://user-images.githubusercontent.com/55689599/102014367-d2052880-3d55-11eb-9a16-a649eb1c343a.png)](https://hl-gatsby-airtable.netlify.app/)
 
-VS-Extension
+## Install
 
-vscode-styled-components
-
-Regular Setup
-
-```jsx
-import styled from "styled-components"
-const NameOfElement = styled.htmlElement`
-your
-styles
-go
-here
-`
 ```
+git clone https://github.com/Orphee1/gatsby-airtable-design-portfolio.git
+cd gatsby-airtable-design-portfolio
 
-Global Styles
-
-```jsx
-import { createGlobalStyle } from "styled-components"
-
-const GlobalStyle = createGlobalStyle`
-your
-global
-styles
-go here
-`
-// wrap root element
-export const wrapRootElement = ({ element }) => {
-  return (
-    <>
-      <GlobalStyle />
-      {element}
-    </>
-  )
-}
-
-Both files
-- gatsby-browser.js
-- gatsby-ssr.js
+npm install
+gatsby develop
 
 ```
 
-## Gatsby Background Image
+## Technologies
 
-```bash
-npm install --save gatsby-background-image
-
-```
-
-## Airtable
-
-[airtable](https://airtable.com/invite/r/h4p0v9Vg)
-
-## env variables
-
-gatsby-config
-
-```js
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
-```
-
-#### ROOT!!!!!!!!!!!!!!!
-
-.env.development
-.env.production
-
-## Algolia
-
-[algolia](https://www.algolia.com/);
+- Gatsby
+- React
+  - React Helmet
+  - Styled Components
+- Airtable
