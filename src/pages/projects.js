@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import { Layout, Projects, Algolia, SEO } from "../components"
+import { Layout, Projects, SEO } from "../components"
 
 const ProjectsPage = ({ data }) => {
   //   console.log(data)
@@ -13,7 +13,7 @@ const ProjectsPage = ({ data }) => {
       <SEO title="Projects" description="This is the projects page" />
       <Layout>
         <Projects projects={projects} page title="our projects" />
-        <Algolia />
+        {/* <Algolia /> */}
       </Layout>
     </Wrapper>
   )

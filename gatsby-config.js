@@ -24,11 +24,11 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    //     {
-    //       resolve: `gatsby-plugin-prefetch-google-fonts`,
-    //       options: {
-    //         fonts: [
-    //           {
+    // {
+    //   resolve: `gatsby-plugin-webfonts`, 
+    //   options: {
+    //     fonts: [
+    //      {
     //             family: `Roboto`,
     //             variants: [`400`, `500`, `700`],
     //           },
@@ -37,10 +37,11 @@ module.exports = {
     //           },
     //           {
     //             family: `Caveat`,
-    //           },
-    //         ],
-    //       },
-    //     },
+    //           }, 
+    //     ]
+    //   }
+    // },
+
     {
       resolve: `gatsby-source-airtable`,
       options: {
@@ -60,15 +61,15 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-algolia`,
-      options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
-        indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
-        queries: require("./src/constants/algolia"),
-        chunkSize: 10000,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-algolia`,
+    //   options: {
+    //     appId: process.env.GATSBY_ALGOLIA_APP_ID,
+    //     apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
+    //     indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+    //     queries: require("./src/constants/algolia"),
+    //     chunkSize: 10000,
+    //   },
+    // },
   ],
 }
